@@ -10,7 +10,7 @@
 require("db_connection.php");
 
 // List Date and Time
-$query = "SELECT id,zeit_in,zeit_out, TIMEDIFF(zeit_out,zeit_in) AS zeit_diff FROM zeitdb ORDER BY id DESC";
+$query = "SELECT id,zeit_in,zeit_out, TIMEDIFF(zeit_out,zeit_in) AS zeit_diff, (TIMEDIFF(zeit_out,zeit_in) - INTERVAL 1 HOUR) AS zeit_mittag FROM zeitdb ORDER BY id DESC";
 
 if (!$result = mysqli_query($con, $query)) {
     exit(mysqli_error($con));
@@ -23,6 +23,7 @@ if (mysqli_num_rows($result) > 0) {
 					<th>Zeit In</th>
 					<th>Zeit Out</th>
 					<th>Std.</th>
+					<th>Abzgl. Mittag</th>
         </tr>
     ';
 	
@@ -32,6 +33,7 @@ if (mysqli_num_rows($result) > 0) {
             <td>'.$row['zeit_in'].'</td>
 			<td>'.$row['zeit_out'].'</td>
 			<td>'.$row['zeit_diff'].'</td>
+			<td>'.$row['zeit_mittag'].'</td>
         </tr>';
         $number++;
     }
@@ -54,7 +56,7 @@ if (mysqli_num_rows($result) > 0) {
     <!--  Header  -->
     <div class="row">
         <div class="col-md-12">
-            <h2>Zeitabfrage / CSV-Export</h2>
+			<h2>Zeitabfrage / CSV-Export</h2>
         </div>
     </div>
     <!--  /Header  -->
