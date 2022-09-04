@@ -10,7 +10,7 @@
 require("db_connection.php");
 
 // List Date and Time
-$query = "SELECT id,zeit_in,zeit_out, TIMEDIFF(zeit_out,zeit_in) AS zeit_diff, (TIMEDIFF(zeit_out,zeit_in) - INTERVAL 1 HOUR) AS zeit_mittag FROM zeitdb ORDER BY id DESC";
+$query = "SELECT id,zeit_in,zeit_out, TIMEDIFF(zeit_out,zeit_in) AS zeit_diff, (TIMEDIFF(zeit_out,zeit_in) - INTERVAL 1 HOUR) AS zeit_mittag FROM zeitdb ORDER BY id ASC";
 
 if (!$result = mysqli_query($con, $query)) {
     exit(mysqli_error($con));
