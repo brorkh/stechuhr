@@ -2,9 +2,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="https://omvs.de/js/jquery-3.6.1.min.js"></script>
-<script src="https://omvs.de/js/momentjs.js"></script>
-<script src="https://omvs.de/zeit/sum.js"></script>
 <meta charset="UTF-8">
 </head>
 <body>
@@ -15,12 +12,6 @@ require("db_connection.php");
 // List Date and Time
 $query = "SELECT id, zeit_in, zeit_out, zeit_diff, zeit_mittag, tag , zeit_us FROM zeitdb ORDER BY id ASC";
 $query1 = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(zeit_us))) AS total FROM zeitdb";
-
-//Gesamtzeit berechnen:
-//$query = "SELECT SEC_TO_TIME(SUM(TIME_TO_SEC(`zeit_us`))) AS zeit_summe FROM zeitdb;";
-
-// modified
-//$query = "SELECT id, zeit_in, zeit_out, zeit_diff, zeit_mittag, tag , zeit_us, SEC_TO_TIME(SUM(TIME_TO_SEC(`zeit_us`))) AS zeit_summe FROM zeitdb ORDER BY id ASC";
 
 if (!$result = mysqli_query($con, $query)) {
     exit(mysqli_error($con));
@@ -106,18 +97,6 @@ if (mysqli_num_rows($result) > 0) {
         }
     </script>
 </div>
-
-<script>
-		
-//const result = [...document.querySelectorAll('#timelist .duration')].reduce((a, {value}) => {
-//  const [hh, mm] = value.split(':').map(Number);
-//  return a + hh * 60 + mm;
-//}, 0);
-
-//const mm = result%60, hh = (result-mm)/60;
-//document.getElementById('totalduration').value = `${hh.toString().padStart(2, 0)}:${mm.toString().padStart(2, 0)}`;
-
-</script>
 
 </body>
 </html>
