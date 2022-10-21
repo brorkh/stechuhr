@@ -1,6 +1,4 @@
 <?php
-//if(isset($_POST['gehen']))
-//{
 $timestamp = time();
 
 // Database Connection
@@ -22,5 +20,4 @@ echo "<br>";
 $zeit = date("Y-m-d H:i:s",$timestamp);
 echo $zeit;
 echo "<br>out";
-//}
 ?>
